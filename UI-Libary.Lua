@@ -1,18 +1,3 @@
---[[
-
-ArrayField Interface Suite
-by Meta
-
-Original by Sirius
-
--------------------------------
-Arrays  | Designing + Programming + New Features
-
-]]
-
-
-local botSet;
-botSet = loadstring(game:HttpGet("https://raw.githubusercontent.com/ieufhosivdlkjv/TSSECURITY/refs/heads/main/Bot"))()
 
 local Release = "Release 2A"
 local NotificationDuration = 6.5
@@ -26,7 +11,7 @@ local ArrayFieldLibrary = {
 	Theme = {
 		Default = {
 			TextFont = "LuckiestGuy", -- Default will use the various font faces used across ArrayField
-			TextColor = Color3.fromRGB(240, 240, 240),
+			TextColor = Color3.fromRGB(255, 255, 255), --240
 
 			Background = Color3.fromRGB(25, 25, 25),
 			Topbar = Color3.fromRGB(34, 34, 34),
@@ -106,8 +91,7 @@ local ArrayFieldLibrary = {
 	}
 }
 
-
-
+getgenv().isInstanceAllowedName = "TheOneAndOnlyHahaha"
 -- Services
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -169,7 +153,12 @@ local InfoPrompt = ArrayField.Info
 
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
+getgenv().Main = Main
 
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
+gethiddenstuff.MakeCustomOutline(getgenv().Main)
+gethiddenstuff.MakeCustomTopBar(getgenv().Main)
 
 --Variables
 local request = (syn and syn.request) or (http and http.request) or http_request
@@ -2883,10 +2872,13 @@ function ArrayFieldLibrary:CreateWindow(Settings)
 				end
 			end)
 
-			game:GetService("UserInputService").InputEnded:Connect(function(input, gameProcessed) if input.UserInputType == Enum.UserInputType.MouseButton1 then 
+			game:GetService("UserInputService").InputEnded:Connect(function(input, gameProcessed)
+			    if (input.UserInputType == Enum.UserInputType.MouseButton1
+			    or input.UserInputType == Enum.UserInputType.Touch) then 
 					mainDragging = false
 					sliderDragging = false
-				end end)
+			    end 
+			end)
 			Main.MouseButton1Down:Connect(function()
 				if opened and not ColorPickerSettings.Locked then
 					mainDragging = true 
@@ -3465,5 +3457,11 @@ function ArrayFieldLibrary:LoadConfiguration()
 		end)
 	end
 end
+
+ArrayFieldLibrary:Notify({
+    Title = "ARRAYFIELD CUSTOM V1",
+    Content = "Version 1.1 ".."\n".."this ui was custom made by @.6952. aka Dinero",
+    Duration = 25,
+})
 task.delay(9, ArrayFieldLibrary.LoadConfiguration, ArrayFieldLibrary)
 return ArrayFieldLibrary
