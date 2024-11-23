@@ -13,7 +13,7 @@ local ArrayFieldLibrary = {
 			TextFont = "LuckiestGuy", -- Default will use the various font faces used across ArrayField
 			TextColor = Color3.fromRGB(255, 255, 255), --240
 
-			Background = Color3.fromRGB(25, 25, 25),
+			Background = Color3.fromRGB(5, 5, 5),
 			Topbar = Color3.fromRGB(34, 34, 34),
 			Shadow = Color3.fromRGB(20, 20, 20),
 
@@ -154,23 +154,102 @@ local InfoPrompt = ArrayField.Info
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 getgenv().Main = Main
-loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
+--[[loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
+gethiddenstuff.MakeCustomOutline(getgenv().Main)
+gethiddenstuff.MakeCustomTopBar(getgenv().Main)]]
+
+
+RunService = game:GetService("RunService")
+gethiddenstuff = {}
+gethiddenstuff.MakeCustomOutline = function(Main)
+    local rainbowColor = Instance.new("UIStroke",Main)
+    rainbowColor.Thickness = 1.5
+    rainbowColor.ApplyStrokeMode = "Border"
+    rainbowColor.Color = Color3.new(1,1,1)
+    rainbowColor.Transparency = 0
+    local colorgrad = Instance.new("UIGradient",rainbowColor)
+    colorgrad.Color = ColorSequence.new(
+        Color3.fromHex("030bfc"),
+        Color3.fromHex("03fcec")
+        )
+    if Main 
+    and Main:FindFirstChild("UIStroke")
+    and Main:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
+        uiconnection = RunService.RenderStepped:Connect(function(deltaTime)
+            if Main 
+            and Main:FindFirstChild("UIStroke")
+            and Main:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
+                uiG = Main.UIStroke.UIGradient
+                uiG.Rotation = (uiG.Rotation + 1) % 360
+            end
+        end)
+    end
+end
+
+gethiddenstuff.MakeCustomTopBar = function(Main)
+    local customTopbar = Instance.new("UIStroke",Main.Topbar)
+    customTopbar.Thickness = 1.5
+    customTopbar.ApplyStrokeMode = "Border"
+    customTopbar.Color = Color3.new(1,1,1)
+    customTopbar.Transparency = 0
+    local customgradcolor = Instance.new("UIGradient",customTopbar)
+    customgradcolor.Color = ColorSequence.new(
+        Color3.fromHex("030bfc"),
+        Color3.fromHex("03fcec")
+        )
+    if Main.Topbar
+    and Main.Topbar:FindFirstChild("UIStroke")
+    and Main.Topbar:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
+        uitopbarconnection = RunService.RenderStepped:Connect(function(deltaTime)
+            if Main.Topbar
+            and Main.Topbar:FindFirstChild("UIStroke")
+            and Main.Topbar:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
+                uitopG = Main.Topbar.UIStroke.UIGradient
+                uitopG.Rotation = (uitopG.Rotation + 1) % 360
+            end
+        end)
+    end
+end
+
+gethiddenstuff.MakeCustomSlider = function(Main)
+    local sliderlo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Slider"):FindFirstChild("Main"):FindFirstChild("Progress")
+    local customgradcolor = Instance.new("UIGradient",sliderlo)
+    customgradcolor.Color = ColorSequence.new(
+        Color3.fromHex("030bfc"),
+        Color3.fromHex("03fcec")
+        )
+    if sliderlo and sliderlo:FindFirstChild("UIGradient") then
+        uislidconnection = RunService.RenderStepped:Connect(function(deltaTime)
+            if sliderlo and sliderlo:FindFirstChild("UIGradient") then
+                uitG = sliderlo.UIGradient
+                uitG.Rotation = (uitG.Rotation + 1) % 500
+            end
+        end)
+    end
+end
+
+gethiddenstuff.MakeCustomToggle = function(Main)
+    local togglelo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Toggle"):FindFirstChild("Switch"):FindFirstChild("Indicator")
+    local ccolor = Instance.new("UIGradient",togglelo)
+    ccolor.Color = ColorSequence.new(
+        Color3.fromHex("030bfc"),
+        Color3.fromHex("03fcec")
+        )
+    if togglelo and togglelo:FindFirstChild("UIGradient") then
+        uitogconnection = RunService.RenderStepped:Connect(function(deltaTime)
+            if togglelo and togglelo:FindFirstChild("UIGradient") then
+                uitgG = togglelo.UIGradient
+                uitgG.Rotation = (uitG.Rotation + 1) % 500
+            end
+        end)
+    end
+end
 gethiddenstuff.MakeCustomOutline(getgenv().Main)
 gethiddenstuff.MakeCustomTopBar(getgenv().Main)
-local findslider = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Slider"):FindFirstChild("Main")
-local slideruigrads = Instance.new("UIGradient",findslider)
-slideruigrads.Color = ColorSequence.new(
-    Color3.fromHex("ed7d1a"),
-    Color3.fromHex("211aed")
-    )
-if findslider and findslider:FindFirstChild("UIGradient") then
-    uisliderconn = RunService.RenderStepped:Connect(function(deltaTime)
-        if findslider and findslider:FindFirstChild("UIGradient") then
-            uisliderG = Main.Elements.Template.Slider.Main.UIGradient
-            uisliderG.Rotation = (uisliderG.Rotation + 1) % 340
-        end
-    end)
-end
+gethiddenstuff.MakeCustomToggle(getgenv().Main)
+gethiddenstuff.MakeCustomSlider(getgenv().Main)
+
+
 
 --Variables
 local request = (syn and syn.request) or (http and http.request) or http_request
@@ -223,7 +302,8 @@ local function AddDraggingFunctionality(DragPoint, Main)
 	pcall(function()
 		local Dragging, DragInput, MousePos, FramePos = false,false,false,false
 		DragPoint.InputBegan:Connect(function(Input)
-			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if (Input.UserInputType == Enum.UserInputType.MouseButton1
+		    or Input.UserInputType == Enum.UserInputType.Touch) then
 				Dragging = true
 				MousePos = Input.Position
 				FramePos = Main.Position
@@ -236,7 +316,8 @@ local function AddDraggingFunctionality(DragPoint, Main)
 			end
 		end)
 		DragPoint.InputChanged:Connect(function(Input)
-			if Input.UserInputType == Enum.UserInputType.MouseMovement then
+			if (Input.UserInputType == Enum.UserInputType.MouseMovement
+			or Input.UserInputType == Enum.UserInputType.Touch) then
 				DragInput = Input
 			end
 		end)
@@ -282,10 +363,11 @@ local function FadeDescription(Infos,type,Out:boolean?)
 		end
 
 		if not Infos 
-		and not Infos:FindFirstChild("Info"):FindFirstChild("Image") then
+		and not Infos.Info
+		and not Infos.Info.Image then
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
-		elseif Infos then
+		elseif Infos and Infos.Info then
 			InfoPrompt.ImageLabel.Visible = true
 			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
 			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
@@ -2626,7 +2708,7 @@ function ArrayFieldLibrary:CreateWindow(Settings)
 			end
 			return KeybindSettings
 		end
-
+		
 		-- Toggle
 		function Tab:CreateToggle(ToggleSettings)
 
