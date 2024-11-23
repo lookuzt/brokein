@@ -263,7 +263,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 		Transparency = 1
 		WaitTime = nil
 	end
-	if not Out and Infos ~= nil then
+	if not Out then
 		-- Set the Status
 		if type == 'slider' then
 			InfoPrompt.Status.Text = Infos.CurrentValue
@@ -281,13 +281,11 @@ local function FadeDescription(Infos,type,Out:boolean?)
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
 		elseif Infos and Infos ~= nil and Infos.Info then
-			InfoPrompt.ImageLabel.Visible = true
+			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
 			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
 		end
-		if Infos
-		and Infos ~= nil 
-		and Infos.Info then
+		if Infos and Infos ~= nil and Infos.Info then
 		    --InfoPrompt.Title.Text = Infos.Info.Title
 		    --InfoPrompt.Description.Text = Infos.Info.Description
 		end
