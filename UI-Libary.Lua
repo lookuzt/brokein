@@ -256,14 +256,14 @@ end
 
 local function FadeDescription(Infos,type,Out:boolean?)
 	local Size = UDim2.fromOffset(230,275)
-	local Transparency = 0
+	local Transparency = 1
 	local WaitTime = .05
 	if Out then
 		Size = UDim2.fromOffset(212,254)
 		Transparency = 1
 		WaitTime = nil
 	end
-	if not Out then
+	if not Out and Infos ~= nil then
 		-- Set the Status
 		if type == 'slider' then
 			InfoPrompt.Status.Text = Infos.CurrentValue
@@ -285,12 +285,14 @@ local function FadeDescription(Infos,type,Out:boolean?)
 			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
 			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
 		end
-		if Infos and Infos ~= nil and Infos.Info then
+		if Infos
+		and Infos ~= nil 
+		and Infos.Info then
 		    --InfoPrompt.Title.Text = Infos.Info.Title
 		    --InfoPrompt.Description.Text = Infos.Info.Description
 		end
 	end
-	TweenService:Create(InfoPrompt,TweenInfo.new(.3,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),{
+	--[[TweenService:Create(InfoPrompt,TweenInfo.new(.3,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),{
 		Size = Size,BackgroundTransparency = Transparency
 	}):Play()
 	TweenService:Create(InfoPrompt.ImageLabel,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
@@ -304,7 +306,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 	}):Play()
 	TweenService:Create(InfoPrompt.Title,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
 		TextTransparency = Transparency
-	}):Play()
+	}):Play()]]
 end
 
 function AddInfos(Object:Frame,Settings,type)
