@@ -270,7 +270,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 			InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
 		end
 
-		if not Infos.Info.Image then
+		if not Infos:FindFirstChild("Info"):FindFirstChild("Image") then
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
 		else
@@ -3192,9 +3192,9 @@ function ArrayFieldLibrary:CreateWindow(Settings)
 					Dragging = true 
 				end 
 			end)
-			Slider.Main.Interact.MouseButton1Up:Connect(function(X) 
+			--[[Slider.Main.Interact.MouseButton1Up:Connect(function(X) 
 				Dragging = false 
-			end)
+			end)]]
 			Slider.Main.Interact.MouseMoved:Connect(function(X)
 				if SliderSettings.Locked then return end
 				if Dragging then
