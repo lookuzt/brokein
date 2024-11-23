@@ -288,8 +288,8 @@ local function FadeDescription(Infos,type,Out:boolean?)
 		if Infos
 		and Infos ~= nil 
 		and Infos.Info then
-		    InfoPrompt.Title.Text = Infos.Info.Title
-		    InfoPrompt.Description.Text = Infos.Info.Description
+		    --InfoPrompt.Title.Text = Infos.Info.Title
+		    --InfoPrompt.Description.Text = Infos.Info.Description
 		end
 	end
 	TweenService:Create(InfoPrompt,TweenInfo.new(.3,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),{
