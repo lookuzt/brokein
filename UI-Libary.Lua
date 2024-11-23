@@ -150,7 +150,8 @@ local Filler = SearchBar.CanvasGroup.Filler
 local Prompt = Main.Prompt
 local NotePrompt = Main.NotePrompt
 local InfoPrompt = ArrayField.Info
-
+local mainUICorner = Instance.new("UICorner",Main)
+mainUICorner.CornerRadius = UDim.new(1,0,1,0) 
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 getgenv().Main = Main
@@ -362,9 +363,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 			InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
 		end
 
-		if not Infos 
-		and not Infos.Info
-		and not Infos.Info.Image then
+		if not Infos then
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
 		elseif Infos and Infos.Info then
