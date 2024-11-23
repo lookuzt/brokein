@@ -157,113 +157,7 @@ mainUICorner.CornerRadius = UDim.new(2,0,2,0)
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 getgenv().Main = Main
---[[loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
-gethiddenstuff.MakeCustomOutline(getgenv().Main)
-gethiddenstuff.MakeCustomTopBar(getgenv().Main)]]
-
-
-RunService = game:GetService("RunService")
-gethiddenstuff = {}
-gethiddenstuff.MakeCustomOutline = function(Main)
-    local rainbowColor = Instance.new("UIStroke",Main)
-    rainbowColor.Thickness = 3
-    rainbowColor.ApplyStrokeMode = "Border"
-    rainbowColor.Color = Color3.new(1,1,1)
-    rainbowColor.Transparency = 0
-    local colorgrad = Instance.new("UIGradient",rainbowColor)
-    colorgrad.Color = ColorSequence.new(
-        Color3.fromHex("030bfc"),
-        Color3.fromHex("03fcec")
-        )
-    if Main 
-    and Main:FindFirstChild("UIStroke")
-    and Main:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
-        uiconnection = RunService.RenderStepped:Connect(function(deltaTime)
-            if Main 
-            and Main:FindFirstChild("UIStroke")
-            and Main:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
-                uiG = Main.UIStroke.UIGradient
-                uiG.Rotation = (uiG.Rotation + 1) % 500
-            end
-        end)
-    end
-end
-
-gethiddenstuff.MakeCustomTopBar = function(Main)
-    local customTopbar = Instance.new("UIStroke",Main.Topbar)
-    customTopbar.Thickness = 1.5
-    customTopbar.ApplyStrokeMode = "Border"
-    customTopbar.Color = Color3.new(1,1,1)
-    customTopbar.Transparency = 0
-    local customgradcolor = Instance.new("UIGradient",customTopbar)
-    customgradcolor.Color = ColorSequence.new(
-        Color3.fromHex("030bfc"),
-        Color3.fromHex("03fcec")
-        )
-    if Main.Topbar
-    and Main.Topbar:FindFirstChild("UIStroke")
-    and Main.Topbar:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
-        uitopbarconnection = RunService.RenderStepped:Connect(function(deltaTime)
-            if Main.Topbar
-            and Main.Topbar:FindFirstChild("UIStroke")
-            and Main.Topbar:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
-                uitopG = Main.Topbar.UIStroke.UIGradient
-                uitopG.Rotation = (uitopG.Rotation + 1) % 500
-            end
-        end)
-    end
-end
-
-gethiddenstuff.MakeCustomSlider = function(Main)
-    local sliderlo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Slider"):FindFirstChild("Main"):FindFirstChild("Progress")
-    local customgradcolor = Instance.new("UIGradient",sliderlo)
-    customgradcolor.Color = ColorSequence.new(
-        Color3.fromHex("030bfc"),
-        Color3.fromHex("03fcec")
-        )
-    if sliderlo and sliderlo:FindFirstChild("UIGradient") then
-        uislidconnection = RunService.RenderStepped:Connect(function(deltaTime)
-            if sliderlo and sliderlo:FindFirstChild("UIGradient") then
-                uitG = sliderlo.UIGradient
-                uitG.Rotation = (uitG.Rotation + 1) % 500
-            end
-        end)
-    end
-end
-
-gethiddenstuff.MakeCustomDropdown = function(Main)
-    local dropdownlo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Dropdown"):FindFirstChild("List")
-    local customdrop = Instance.new("UIGradient",dropdownlo)
-    customdrop.Color = ColorSequence.new(
-        Color3.fromHex("030bfc"),
-        Color3.fromHex("03fcec")
-        )
-    if dropdownlo and dropdownlo:FindFirstChild("UIGradient") then
-        uidropdconnection = RunService.RenderStepped:Connect(function(deltaTime)
-            if dropdownlo and dropdownlo:FindFirstChild("UIGradient") then
-                uitGdd = dropdownlo.UIGradient
-                uitGdd.Rotation = (uitGdd.Rotation + 1) % 500
-            end
-        end)
-    end
-end
-
-gethiddenstuff.MakeCustomToggle = function(Main)
-    local togglelo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Toggle"):FindFirstChild("Switch"):FindFirstChild("Indicator")
-    local ccolor = Instance.new("UIGradient",togglelo)
-    ccolor.Color = ColorSequence.new(
-        Color3.fromHex("030bfc"),
-        Color3.fromHex("03fcec")
-        )
-    if togglelo and togglelo:FindFirstChild("UIGradient") then
-        uitogconnection = RunService.RenderStepped:Connect(function(deltaTime)
-            if togglelo and togglelo:FindFirstChild("UIGradient") then
-                uitgG = togglelo.UIGradient
-                uitgG.Rotation = (uitgG.Rotation + 1) % 500
-            end
-        end)
-    end
-end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
 gethiddenstuff.MakeCustomOutline(getgenv().Main)
 gethiddenstuff.MakeCustomTopBar(getgenv().Main)
 gethiddenstuff.MakeCustomToggle(getgenv().Main)
@@ -369,7 +263,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 		Transparency = 1
 		WaitTime = nil
 	end
-	if not Out then
+	if not Out and Infos ~= nil then
 		-- Set the Status
 		if type == 'slider' then
 			InfoPrompt.Status.Text = Infos.CurrentValue
@@ -386,14 +280,17 @@ local function FadeDescription(Infos,type,Out:boolean?)
 		if not Infos then
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
-		elseif Infos and Infos.Info then
+		elseif Infos and Infos ~= nil and Infos.Info then
 			InfoPrompt.ImageLabel.Visible = true
 			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
 			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
 		end
-
-		InfoPrompt.Title.Text = Infos.Info.Title
-		InfoPrompt.Description.Text = Infos.Info.Description
+		if Infos
+		and Infos ~= nil 
+		and Infos.Info then
+		    InfoPrompt.Title.Text = Infos.Info.Title
+		    InfoPrompt.Description.Text = Infos.Info.Description
+		end
 	end
 	TweenService:Create(InfoPrompt,TweenInfo.new(.3,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),{
 		Size = Size,BackgroundTransparency = Transparency
@@ -3520,6 +3417,8 @@ Topbar.Search.MouseButton1Click:Connect(function()
 		CloseSearch()
 	end
 end)
+
+
 Topbar.Type.MouseButton1Click:Connect(function()
 	if Debounce or Minimised then return end
 	if SideBarClosed then
