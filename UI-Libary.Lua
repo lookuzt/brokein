@@ -135,6 +135,8 @@ local ParentObject = function(Gui)
 end
 ParentObject(ArrayField)
 
+
+
 --Object Variables
 
 local Camera = workspace.CurrentCamera
@@ -151,7 +153,7 @@ local Prompt = Main.Prompt
 local NotePrompt = Main.NotePrompt
 local InfoPrompt = ArrayField.Info
 local mainUICorner = Instance.new("UICorner",Main)
-mainUICorner.CornerRadius = UDim.new(1,0,1,0) 
+mainUICorner.CornerRadius = UDim.new(2,0,2,0) 
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 getgenv().Main = Main
@@ -164,7 +166,7 @@ RunService = game:GetService("RunService")
 gethiddenstuff = {}
 gethiddenstuff.MakeCustomOutline = function(Main)
     local rainbowColor = Instance.new("UIStroke",Main)
-    rainbowColor.Thickness = 1.5
+    rainbowColor.Thickness = 3
     rainbowColor.ApplyStrokeMode = "Border"
     rainbowColor.Color = Color3.new(1,1,1)
     rainbowColor.Transparency = 0
@@ -181,7 +183,7 @@ gethiddenstuff.MakeCustomOutline = function(Main)
             and Main:FindFirstChild("UIStroke")
             and Main:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
                 uiG = Main.UIStroke.UIGradient
-                uiG.Rotation = (uiG.Rotation + 1) % 360
+                uiG.Rotation = (uiG.Rotation + 1) % 500
             end
         end)
     end
@@ -206,7 +208,7 @@ gethiddenstuff.MakeCustomTopBar = function(Main)
             and Main.Topbar:FindFirstChild("UIStroke")
             and Main.Topbar:FindFirstChild("UIStroke"):FindFirstChild("UIGradient") then
                 uitopG = Main.Topbar.UIStroke.UIGradient
-                uitopG.Rotation = (uitopG.Rotation + 1) % 360
+                uitopG.Rotation = (uitopG.Rotation + 1) % 500
             end
         end)
     end
@@ -229,6 +231,23 @@ gethiddenstuff.MakeCustomSlider = function(Main)
     end
 end
 
+gethiddenstuff.MakeCustomDropdown = function(Main)
+    local dropdownlo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Dropdown"):FindFirstChild("List")
+    local customdrop = Instance.new("UIGradient",dropdownlo)
+    customdrop.Color = ColorSequence.new(
+        Color3.fromHex("030bfc"),
+        Color3.fromHex("03fcec")
+        )
+    if dropdownlo and dropdownlo:FindFirstChild("UIGradient") then
+        uidropdconnection = RunService.RenderStepped:Connect(function(deltaTime)
+            if dropdownlo and dropdownlo:FindFirstChild("UIGradient") then
+                uitGdd = dropdownlo.UIGradient
+                uitGdd.Rotation = (uitGdd.Rotation + 1) % 500
+            end
+        end)
+    end
+end
+
 gethiddenstuff.MakeCustomToggle = function(Main)
     local togglelo = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Toggle"):FindFirstChild("Switch"):FindFirstChild("Indicator")
     local ccolor = Instance.new("UIGradient",togglelo)
@@ -240,7 +259,7 @@ gethiddenstuff.MakeCustomToggle = function(Main)
         uitogconnection = RunService.RenderStepped:Connect(function(deltaTime)
             if togglelo and togglelo:FindFirstChild("UIGradient") then
                 uitgG = togglelo.UIGradient
-                uitgG.Rotation = (uitG.Rotation + 1) % 500
+                uitgG.Rotation = (uitgG.Rotation + 1) % 500
             end
         end)
     end
@@ -249,6 +268,7 @@ gethiddenstuff.MakeCustomOutline(getgenv().Main)
 gethiddenstuff.MakeCustomTopBar(getgenv().Main)
 gethiddenstuff.MakeCustomToggle(getgenv().Main)
 gethiddenstuff.MakeCustomSlider(getgenv().Main)
+gethiddenstuff.MakeCustomDropdown(getgenv().Main)
 
 
 
