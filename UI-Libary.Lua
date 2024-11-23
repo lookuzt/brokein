@@ -157,7 +157,7 @@ getgenv().Main = Main
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
 gethiddenstuff.MakeCustomOutline(getgenv().Main)
 gethiddenstuff.MakeCustomTopBar(getgenv().Main)
-local findslider = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Slider"):FindFirstChild("Main"):FindFirstChild("Progress")
+local findslider = Main:FindFirstChild("Elements"):FindFirstChild("Template"):FindFirstChild("Slider"):FindFirstChild("Main")
 local slideruigrads = Instance.new("UIGradient",findslider)
 slideruigrads.Color = ColorSequence.new(
     Color3.fromHex("ed7d1a"),
@@ -166,7 +166,7 @@ slideruigrads.Color = ColorSequence.new(
 if findslider and findslider:FindFirstChild("UIGradient") then
     uisliderconn = RunService.RenderStepped:Connect(function(deltaTime)
         if findslider and findslider:FindFirstChild("UIGradient") then
-            uisliderG = Main.Elements.Template.Slider.Main.Progress.UIGradient
+            uisliderG = Main.Elements.Template.Slider.Main.UIGradient
             uisliderG.Rotation = (uisliderG.Rotation + 1) % 340
         end
     end)
@@ -281,7 +281,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
 			InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
 		end
 
-		if not Infos and not Infos:FindFirstChild("Info")
+		if not Infos 
 		and not Infos:FindFirstChild("Info"):FindFirstChild("Image") then
 			InfoPrompt.ImageLabel.Visible = false
 			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
