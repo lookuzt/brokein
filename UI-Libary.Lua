@@ -166,7 +166,7 @@ gethiddenstuff.MakeCustomDropdown(getgenv().Main)
 
 	local uiscale = Instance.new("UIScale", Main)
 	uiscale.Name = "UIScale"
-	uiscale.Scale = 1.1
+	uiscale.Scale = 0.5
 
 --Variables
 local request = (syn and syn.request) or (http and http.request) or http_request
