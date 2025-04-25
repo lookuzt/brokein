@@ -164,7 +164,9 @@ gethiddenstuff.MakeCustomToggle(getgenv().Main)
 gethiddenstuff.MakeCustomSlider(getgenv().Main)
 gethiddenstuff.MakeCustomDropdown(getgenv().Main)
 
-
+	local uiscale = Instance.new("UIScale", Main)
+	uiscale.Name = "UIScale"
+	uiscale.Scale = 1.1
 
 --Variables
 local request = (syn and syn.request) or (http and http.request) or http_request
