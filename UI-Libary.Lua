@@ -157,7 +157,7 @@ mainUICorner.CornerRadius = UDim.new(2,0,2,0)
 ArrayField.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 getgenv().Main = Main
---loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DINERO9/Array/refs/heads/main/YEZZIR.TXT"))()
 gethiddenstuff.MakeCustomOutline(getgenv().Main)
 gethiddenstuff.MakeCustomTopBar(getgenv().Main)
 gethiddenstuff.MakeCustomToggle(getgenv().Main)
